@@ -87,6 +87,7 @@ def selecting():
     # print out records in table format using HTML tags
     response_string = ""
     response_string += "<table>" # open table tag
+    response_string += "<tr><strong><td>First Name</td></strong><strong><td>Last Name</td></strong><strong><td>City</td></strong><strong><td>Team Name</td></strong><strong><td>Player Number</td></strong></tr>"
     for player in players:
         response_string += "<tr>" # open table row tag for each player
         for info in player:
@@ -98,3 +99,4 @@ def selecting():
     
     return response_string # recall from html lecture, all html on a page is 
                            # just a string
+                           

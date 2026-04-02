@@ -67,3 +67,34 @@ def inserting():
     conn.close()
     
     return "Basketball Table Successfully Populated"
+
+@app.route('db_select')
+def selecting():
+    # establish db connection
+    conn = psycopg2.connect("postgresql://flask_hello_world_3308_db_zhm2_user:WGcP8mSCQvIZcVm71PiG7FbodJS6iuvp@dpg-d76ret15pdvs7384es0g-a/flask_hello_world_3308_db_zhm2")
+    
+    # open cursor to connection
+    cur = conn.cursor()    
+    
+    # select all players from basketball table
+    cur.execute('''
+        SELECT * FROM Basketball;
+    ''')
+    
+    # fetch results of query
+    players = cur.fetchall()
+    
+    # print out records in table format using HTML tags
+    response_string = ""
+    response_string += "<table>" # open table tag
+    for player in players:
+        response_string += "<tr>" # open table row tag for each player
+        for info in player:
+            response_string += f"<td>{info}</td>" # open table data cell tag 
+                                                  # for each piece of info for a 
+                                                  # player
+        response_string += "</tr>" # close table row tag
+    response_string += "</table>" # close table tag
+    
+    return response_string # recall from html lecture, all html on a page is 
+                           # just a string

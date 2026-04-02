@@ -101,3 +101,23 @@ def selecting():
     return response_string # recall from html lecture, all html on a page is 
                            # just a string
                            
+@app.route('/db_drop')
+def dropping():
+    # establish db connection
+    conn = psycopg2.connect("postgresql://flask_hello_world_3308_db_zhm2_user:WGcP8mSCQvIZcVm71PiG7FbodJS6iuvp@dpg-d76ret15pdvs7384es0g-a/flask_hello_world_3308_db_zhm2")
+    
+    # open cursor to connection
+    cur = conn.cursor()   
+    
+    # execute drop table sql command
+    cur.execute('''
+        DROP TABLE Basketball;            
+    ''')
+    
+    # commit drop to db
+    conn.commit()
+    
+    # close connection
+    conn.close()
+    
+    return "Basketball Table Successfully Dropped"
